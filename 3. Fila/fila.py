@@ -38,23 +38,23 @@ class Queue:
     def show(self):
         pointer = self.head
         while pointer:
-            print(f"({pointer.data} - {pointer.time})")
+            print(pointer.data, end=" - ")
             pointer = pointer.next
+        print()
 
 
-    def quantum(self, quantum):
-        while self.head:
-            self.head.time = self.head.time - quantum
-            if self.head.time <= 0:
-                print(f"{self.head.data} removido! Tempo: {self.head.time}")
-                self.dequeue()
-            else:
-                node = self.head.data
-                time = self.head.time
-                self.dequeue()
-                self.enqueue(node, time)
-            #self.show()
-            #print()
+def quantum(fila, quantum):
+     while fila.head:
+        fila.head.time = fila.head.time - quantum
+        if fila.head.time <= 0:
+            print(f"Processo {fila.head.data} finalizado!")
+            fila.dequeue()
+        else:
+            node = fila.head.data
+            time = fila.head.time
+            fila.dequeue()
+            fila.enqueue(node, time)
+            print(f"Processo {node} retornou ao final da fila com {time}s!")
 
 
 ## TESTANDO
@@ -69,6 +69,6 @@ fila.enqueue(5, 9)  # 5  | 1  | -3 |
 
 fila.show()
 
-fila.quantum(4)
+quantum(fila, 4)
 
 # Raiany Vitoria Prado Mendes  | TADS 3
